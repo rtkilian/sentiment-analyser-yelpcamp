@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, request
 
 import spacy
 from spacytextblob.spacytextblob import SpacyTextBlob
@@ -9,12 +9,13 @@ nlp.add_pipe('spacytextblob')
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/predict', methods=['POST'])
 def process_sentiment():
-    text = 'This campsite was okay'
-    doc = nlp(text)
-    score = doc._.polarity
-    return render_template('index.html', score=score)
+    if request.method == 'POST':
+        review = request.form['review']
+        doc = nlp(review)
+        score = doc._.polarity
+        return {'score': score}
 
 
 if __name__ == '__main__':
