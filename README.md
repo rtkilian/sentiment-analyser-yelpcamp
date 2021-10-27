@@ -1,4 +1,4 @@
-# Sentiment Analysis App
+# Sentiment Analysis API using spaCy and Flask.
 This is a simple sentiment analysis API developed using:
 * spaCy and spaCyTextBlob
 * Flask and Flask-RESTful
